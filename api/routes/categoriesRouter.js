@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-
+const getConnection = require('../libs/postgres');
 const categoriesData = [
   'Sports',
   'Books',
@@ -10,15 +10,21 @@ const categoriesData = [
   'Children and Baby Toys',
 ]
 
-router.get('/', (req, res) => {
-  const categories = []
-  for (let i = 0; i < categoriesData.length; i++) {
-    categories.push({
-      categoryName: categoriesData[i],
-    })
-  }
-  res.status(200).json(
-    categories
+router.get('/', async (req, res) => {
+  // const categories = []
+  // for (let i = 0; i < categoriesData.length; i++) {
+  //   categories.push({
+  //     categoryName: categoriesData[i],
+  //   })
+  // }
+  // res.status(200).json(
+  //   categories
+  // )
+
+  const client = getConnection();
+  const rta = (await client).query('SELECT * FROM tasks');
+  res.json(
+    (await rta).rows
   )
 })
 

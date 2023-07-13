@@ -2,11 +2,16 @@ const { faker } = require('@faker-js/faker');
 const boom = require('@hapi/boom');
 
 
+const pool = require('../libs/postgresPool');
+
 
 class ProductsService {
   constructor() {
     this.products = [];
     this.generate();
+    this.pool = pool;
+    //pool.on sirve para escuchar eventos... en este caso quiero escuchar el error en caso de que haya algún problema al realizar la conexión
+    this.pool.on('error', (err)=> console.error(err));
   }
 
   generate() {
@@ -32,13 +37,16 @@ class ProductsService {
     return newProduct;
   }
 
-  find() {
+  async find() {
     // return new Promise((resolve) => {
     //   setTimeout(() => {
     //     resolve(this.products);
     //   }, (5000));
     // })
-    return this.products;
+    const query =  'SELECT * FROM tasks';
+    const rta = await this.pool.query(query);
+    return rta.rows;
+    // return this.products;
   }
 
   async findOne(id) {
