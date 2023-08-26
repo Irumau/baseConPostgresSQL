@@ -1,21 +1,4 @@
 # EndPoints
-
-## Products
-
-- GET: https://api-rest-con-expres-js.vercel.app/api/v1/products
-- GET: https://api-rest-con-expres-js.vercel.app/api/v1/products/:id
-- POST: https://api-rest-con-expres-js.vercel.app/api/v1/products
-- PATCH: https://api-rest-con-expres-js.vercel.app/api/v1/products/:id
-- DELETE: https://api-rest-con-expres-js.vercel.app/api/v1/products/:id
-
-## Users
-
-- GET: https://api-rest-con-expres-js.vercel.app/api/v1/users
-- GET: https://api-rest-con-expres-js.vercel.app/api/v1/users/:id
-- POST: https://api-rest-con-expres-js.vercel.app/api/v1/users
-- PATCH: https://api-rest-con-expres-js.vercel.app/api/v1/users/:id
-- DELETE: https://api-rest-con-expres-js.vercel.app/api/v1/users/:id
-
 # NOTAS
 
 ## Rest: Representational State Transfer
