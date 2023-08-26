@@ -1,13 +1,14 @@
 const express = require('express');
 const ProductsService = require('../services/productsService');
 const validatorHandler = require('../middlewares/validatorHandler');
-const { createProductSchema, updateProductSchema, getProductSchema } = require('../schemas/productSchema');
+const { createProductSchema, updateProductSchema, getProductSchema, queryProductSchema } = require('../schemas/productSchema');
 
 const router = express.Router();
 const service = new ProductsService();
 
 router.get('/', async (req, res) => {
-  const products = service.find();
+  const products = await service.find(req.query);
+
   res.json(products);
 });
 
@@ -16,8 +17,6 @@ router.get('/', async (req, res) => {
 // })
 
 // le coloco los dos puntos antes de la palabra id para indicar que recibe un parámetro
-
-
 
 router.get('/:id',
   validatorHandler(getProductSchema, 'params'),
@@ -31,6 +30,17 @@ router.get('/:id',
       next(err);
     }
   });
+
+router.get('/', validatorHandler(queryProductSchema, 'query'),
+async (req, res,next) => {
+  try{
+    const products = await service.find(req.query);
+    res.json(products);
+  }catch(err){
+    next(err);
+  }
+});
+
 
 router.post('/',
   validatorHandler(createProductSchema, 'body'),

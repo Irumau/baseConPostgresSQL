@@ -1,8 +1,7 @@
 const express = require('express');
 const routerApi = require('./routes');
 const cors = require('cors');
-
-const { logErrors, errorHandler, boomErrorHandler } = require('./middlewares/errorHandler');
+const { logErrors, errorHandler, boomErrorHandler, ormHandleError } = require('./middlewares/errorHandler');
 
 const app = express();
 const port = process.env.PORT || 3000;
@@ -37,7 +36,8 @@ routerApi(app);
 // Es importante el orden de como se envían estas funciones debido a que si mandamos en este caso errorHandler primero
 //"cortaría" el proceso de logErrors dado que errorHandler no esta usando el método next()
 app.use(logErrors);
-app.use(boomErrorHandler)
+app.use(ormHandleError);
+app.use(boomErrorHandler);
 app.use(errorHandler);
 
 //app.listen escucha el puerto en especifico.
