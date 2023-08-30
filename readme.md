@@ -1,5 +1,5 @@
 # EndPoints
-# NOTAS
+
 
 ## Rest: Representational State Transfer
 
@@ -13,7 +13,7 @@ Métodos:
 - Delete: Eliminar
 
 La convención de REST nos dice que por cada casi entidad que tengamos tendremos una ruta, un endpoint con un nombre, y también deberíamos tener un id por cada producto
-
+# NOTAS
 ## Conceptos
 
 ### Middleware
