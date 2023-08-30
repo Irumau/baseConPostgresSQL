@@ -1,4 +1,4 @@
-version: '1.27.0'
+version: '24.0.2'
 
 services:
   postgres:
